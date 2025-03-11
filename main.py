@@ -1,6 +1,6 @@
 from graphics import Window
-from cell import Cell
 from maze import Maze
+import sys
 
 def main():
     num_rows = 12
@@ -17,7 +17,13 @@ def main():
     maze._break_entrance_and_exit()
     maze._break_walls_r(0, 0)
     maze._reset_cells_visited()
-    maze.solve()
+    sys.setrecursionlimit(10000)
+    
+    is_solvable = maze.solve()
+    if not is_solvable:
+        print("Maze is not solvable")
+    else:
+        print("Maze is solvable")
 
 
     win.wait_for_close()
